@@ -1,14 +1,5 @@
 #pragma once
 
-/*
-Program answer redundancy library
-2022.10.06
-Alessandro Accardi
-Short loops to ask user to retry the input if it fails
-Changelog:
-Updated: 2022.10.07 || Added faicheck for double/float
-*/
-
 #include <iostream>
 
 void FCInt() { //Fail check for integers

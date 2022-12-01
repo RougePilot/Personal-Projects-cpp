@@ -1,11 +1,18 @@
 #pragma once
 
+/*
+Program answer redundancy library
+2022.10.06
+Alessandro Accardi
+Short loops to ask user to retry the input if it fails
+*/
+
 #include <iostream>
 
 void FCInt() { //Fail check for integers
     int ans;
-    bool fail = true;
-    while (fail == true) {
+    bool cinfail = true;
+    while (cinfail == true) {
         std::cout << "Please enter an integer: ";
         std::cin >> ans;
         if (std::cin.fail()) {
@@ -16,15 +23,15 @@ void FCInt() { //Fail check for integers
         }
         else {
             std::cout << "Success!" << "\n";
-            fail = false;
+            cinfail = false;
         }
     }
 }
 
 void FCDouble() { //Fail check forfloating point numbers
     double ans;
-    bool fail = true;
-    while (fail == true) {
+    bool cinfail = true;
+    while (cinfail == true) {
         std::cout << "please enter a number: ";
         std::cin >> ans;
         if (std::cin.fail()) {
@@ -35,7 +42,7 @@ void FCDouble() { //Fail check forfloating point numbers
         }
         else {
             std::cout << "Success!" << "\n";
-            fail = false;
+            cinfail = false;
         }
     }
 }

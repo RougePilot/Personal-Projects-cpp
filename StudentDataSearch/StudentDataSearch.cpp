@@ -14,10 +14,10 @@ int main()
 	int n = 10;//number of students in database
 	int StuID;//for searching the ID of the student
 	std::string lname;//for searching the last name of the student
-	int ID[10];
-	std::string Name[10];
-	std::string LName[10];
-	double GPA[10];
+	int* ID=new int[n];
+	std::string* Name=new std::string[n];
+	std::string* LName=new std::string[10];
+	double* GPA=new double[n];
 	int i = 0;//counting for the array scraper
 	int k;
 	std::string ans = "ID";
@@ -34,7 +34,7 @@ int main()
 
 	bool Answer=true;
 
-	std::cout << "GSST Student Information System\n";
+	std::cout << "GSST Student Information System\n\n";
 	
 	do {
 		std::cout << "Would you like to search by ID number or Last Name? (ID/LName): ";
@@ -43,12 +43,14 @@ int main()
 		if (ans == "ID") {
 			std::cout << "Please enter the student's ID Number: ";
 			std::cin >> StuID;
+			std::cout << "\n";
 			Answer = true;
 			break;
 		}
 		else if (ans == "LName") {
 			std::cout << "Please enter the student's last name: ";
 			std::cin >> lname;
+			std::cout << "\n";
 			Answer == true;
 			break;
 		}

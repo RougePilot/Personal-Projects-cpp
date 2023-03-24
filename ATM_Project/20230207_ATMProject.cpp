@@ -2,7 +2,7 @@
 2023.2.7
 Alessandro Accardi
 ATM Project
-V.3 (2023.3.2)
+V.4.1 (2023.03.24)
 */
 
 #include <iostream>
@@ -274,7 +274,6 @@ int main() {
             cout << "<INVALID OPERATION>\n";
         }
     } while (op == false);
-
 
 skip2:;
     int hold    = CheckUser(Users);

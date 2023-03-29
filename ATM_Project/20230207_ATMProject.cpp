@@ -2,7 +2,7 @@
 2023.2.7
 Alessandro Accardi
 ATM Project
-V.4.1 (2023.03.24)
+V.4.2 (2023.03.29)
 */
 
 #include <iostream>
@@ -128,7 +128,7 @@ User *DoTransaction(User *CU) {
                 if (uname == CU->CheckingAcc->GetAccNum()) {
                     ans = true;
                     do {
-                        cout << "Select an operation to perform: [DEPOSIT] [WITHDRAW] [INQUIRE] [DELETE]\n";
+                        cout << "Select an operation to perform: [DEPOSIT] [WITHDRAW] [INQUIRE] [CLOSE]\n";
                         cin >> selection;
                         if (selection == "DEPOSIT") {
                             CU->CheckingAcc->Deposit();
@@ -139,7 +139,7 @@ User *DoTransaction(User *CU) {
                         else if (selection == "INQUIRE") {
                             CU->CheckingAcc->Inquire();
                         }
-                        else if (selection == "DELETE") {
+                        else if (selection == "CLOSE") {
                             CloseAccount(CU);
                             goto skips;
                         }
@@ -161,7 +161,7 @@ User *DoTransaction(User *CU) {
                     CU->SavingsAcc->GainLoss();
                     //cout << CU.SavingsAcc.GetBal()<< " After GainLoss()"<< endl << endl ;//DEBUG
                     do {
-                        cout << "Select an operation to perform: [DEPOSIT] [WITHDRAW] [INQUIRE] [DELETE]\n";
+                        cout << "Select an operation to perform: [DEPOSIT] [WITHDRAW] [INQUIRE] [CLOSE]\n";
                         cin >> selection;
                         if (selection == "DEPOSIT") {
                             CU->SavingsAcc->Deposit();
@@ -172,7 +172,8 @@ User *DoTransaction(User *CU) {
                         else if (selection == "INQUIRE") {
                             CU->SavingsAcc->Inquire();
                         }
-                        else if (selection == "DELETE") {
+                        else if (selection == "CLOSE") {
+                            CloseAccount(CU);
                             goto skips;
                         }
                         else {
@@ -265,8 +266,8 @@ int main() {
             goto skip2;
         }
         else if (ans == "OPEN") {
-            //++i;
             Users[i] = OpenAccount(Users, (i));
+            i++;
             op = true;
         }
         else {
@@ -274,6 +275,7 @@ int main() {
             cout << "<INVALID OPERATION>\n";
         }
     } while (op == false);
+
 
 skip2:;
     int hold    = CheckUser(Users);
@@ -284,5 +286,5 @@ skip2:;
 
     Users[hold] = *CurrentUser;
     
-    WriteUserData(Users, i+1);
+    WriteUserData(Users, i);
 }

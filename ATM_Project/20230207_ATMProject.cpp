@@ -2,7 +2,7 @@
 2023.2.7
 Alessandro Accardi
 ATM Project
-V.4.2 (2023.03.29)
+V.4.3 (2023.03.30)
 */
 
 #include <iostream>
@@ -68,6 +68,30 @@ public:
         cout << "You have one SAVINGS ACCOUNT\n";
     }
     ~SavingsAccount() { cout << "Signing out of SAVINGS ACCOUNT\n"; }
+
+    void Deposit() {
+        GainLoss();
+        cout << "Enter amount in USD to deposit into your account: ";
+        cin >> amt;
+        Balance = Balance + amt;
+        cout << "New balance is: $" << GetBal() << "\n";
+    }
+    void Withdraw() {
+        GainLoss();
+        cout << "Enter amount in USD to withdraw from your account: ";
+        cin >> amt;
+        if (amt > Balance) {
+            cout << "Your balance is less than $" << amt << ", so you may not withdraw this amount.\n";
+        }
+        else {
+            Balance = Balance - amt;
+            cout << "New balance is: $" << Balance << "\n";
+        }
+    }
+    void Inquire() {
+        GainLoss();
+        cout << "Current balance is: $" << Balance << "\n";
+    }
 };
 
 class User {
@@ -90,7 +114,7 @@ public:
 //Normal Functions
 User OpenAccount(User Users[100], int i) {
     int pin;
-    int id = 100 + i;
+    int id   = Users[i-1].GetID() + 1;
     int cnum = 1000 + i + 1;
     int snum = 2000 + i + 1;
     cout << endl << "Please enter a PIN for your account: ";
@@ -157,9 +181,6 @@ User *DoTransaction(User *CU) {
                 }
                 else if (uname == CU->SavingsAcc->GetAccNum()) {
                     ans = true;
-                    //cout << CU.SavingsAcc.GetBal() << " Before GainLoss()" << endl << endl;//DEBUG
-                    CU->SavingsAcc->GainLoss();
-                    //cout << CU.SavingsAcc.GetBal()<< " After GainLoss()"<< endl << endl ;//DEBUG
                     do {
                         cout << "Select an operation to perform: [DEPOSIT] [WITHDRAW] [INQUIRE] [CLOSE]\n";
                         cin >> selection;
@@ -206,9 +227,11 @@ skips:;
 void WriteUserData(User CU[100], int hold) {
     ofstream UserList("accounts.txt");
     for (int i = 0; i < hold; i++) {
-        UserList << CU[i].GetID() << " " << CU[i].GetPIN() << " " << CU[i].CheckingAcc->GetAccNum() << " " << CU[i].CheckingAcc->GetBal() << " " << CU[i].SavingsAcc->GetAccNum() << " " << CU[i].SavingsAcc->GetBal();
-        if (i < hold-1) {
-            UserList << endl;
+        if (CU[i].GetPIN() != (-1)) {
+            UserList << CU[i].GetID() << " " << CU[i].GetPIN() << " " << CU[i].CheckingAcc->GetAccNum() << " " << CU[i].CheckingAcc->GetBal() << " " << CU[i].SavingsAcc->GetAccNum() << " " << CU[i].SavingsAcc->GetBal();
+            if (i < hold - 1) {
+                UserList << endl;
+            }
         }
     }
     UserList.close();
@@ -263,7 +286,7 @@ int main() {
         cin >> ans;
         if (ans == "LOGIN") {
             op = true;
-            goto skip2;
+            break;
         }
         else if (ans == "OPEN") {
             Users[i] = OpenAccount(Users, (i));
@@ -277,7 +300,6 @@ int main() {
     } while (op == false);
 
 
-skip2:;
     int hold    = CheckUser(Users);
 
     *CurrentUser = Users[hold];

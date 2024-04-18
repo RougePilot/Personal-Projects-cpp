@@ -6,7 +6,7 @@ Calculator with OOP
 
 #include <iostream>
 #include <iomanip>
-#include<cmath>
+#include <cmath>
 using namespace std;
 
 class Calculator {
@@ -30,7 +30,7 @@ public:
 Calculator::Calculator() {
 	num1 = 0;
 	num2 = 0;
-	cout << "Welcome to the calculator!\nAvailable operations: + - * / ^\nType 'C0' to exit and '0 0 0' to exit\n";
+	cout << "Welcome to the calculator!\nAvailable operations: + - * / ^\nType 'C0' to clear memory and '0 0 0' to exit\n";
 	cin >> num1 >> operation >> num2;
 	mem = num1;
 	do {

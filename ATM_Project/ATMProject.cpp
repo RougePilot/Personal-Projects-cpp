@@ -2,7 +2,7 @@
 2023.2.7
 Alessandro Accardi
 ATM Project
-V.4.3 (2023.03.30)
+V.4.4 (2025.04.09)
 */
 
 #include <iostream>
@@ -17,8 +17,8 @@ protected:
     int AccNum;
 public:
     double amt;
-    ATM();
-    ~ATM();
+    // ATM() {std::cout<<"A1";}
+    // ~ATM() {std::cout<<"A2";}
     virtual void Deposit() {
         cout << "Enter amount in USD to deposit into your account: ";
         cin >> amt;
@@ -44,17 +44,11 @@ public:
     double GetAccNum() { return AccNum; }
     void SetAccNum(int ncn) { AccNum = ncn; }
 };
-ATM::ATM() {
-    cout << "Welcome to Based Bank, where we keep your money safe and secure.\n";
-}
-ATM::~ATM() {
-    cout << "Thank you for using Based Bank. Remember to eat healthy, lift often, and don't drink the corn syrup.\n";
-}
 
 class CheckingAccount :public ATM {
 public:
-    CheckingAccount() { cout << "You have one CHECKING ACCOUNT\n"; }
-    ~CheckingAccount() { cout << "Signing out of CHECKING ACCOUNT\n"; }
+    // CheckingAccount() {std::cout<<"C1";}
+    // ~CheckingAccount() {std::cout<<"C2";}
 };
 class SavingsAccount :public ATM {
 public:
@@ -64,10 +58,8 @@ public:
         multiplier = multiplier / 100;
         Balance = Balance + Balance * multiplier;
     }
-    SavingsAccount() {
-        cout << "You have one SAVINGS ACCOUNT\n";
-    }
-    ~SavingsAccount() { cout << "Signing out of SAVINGS ACCOUNT\n"; }
+    // SavingsAccount() {std::cout<<"S1";}
+    // ~SavingsAccount() {std::cout<<"S2";}
 
     void Deposit() {
         GainLoss();
@@ -282,7 +274,7 @@ int main() {
     bool op;
     
     do {
-        cout << "Please select operation: [LOGIN] [OPEN]\n";
+        cout << std::endl << "Please select operation: [LOGIN] [OPEN]\n";
         cin >> ans;
         if (ans == "LOGIN") {
             op = true;

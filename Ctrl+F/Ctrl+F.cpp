@@ -7,45 +7,30 @@ Searching for a word in a text file and giving the number of times the word appe
 #include <iostream>
 #include <fstream>
 
-int main()
+int main(int argc, char* argv[])
 {
+	std::string FileName = argv[1];
 	std::string word;
 	std::string aword;
-	std::ifstream Document("article.txt");
 
-	std::string x = "Y";
-	while (x == "Y" || x == "Yes") {
-
+	std::string ans = "Y";
+	while (ans == "Y" || ans == "Yes") {
+		std::ifstream Document(FileName);
 		int count = 0;
+		std::cout << "Enter an English word: ";
+		std::cin >> word;
 
-		bool fail = true;
-		while (fail == true) {
-			std::cout << "Enter an English word: ";
-			std::cin >> word;
-			if (std::cin.fail()) {
-				std::cin.clear();
-				std::cin.sync();
-				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-				std::cout << "Fail" << "\n" << "Error: input is not a word, please input a word" << "\n";
-			}
-			else {
-				fail = false;
-				continue;
-			}
-		}
-
-		while (!Document.eof()) {
+		do {
 			Document >> aword;
-			if (aword == word || aword == word + "." || aword == word + ",") {
-				count++;
-			}
-		}
+			if (aword == word || aword == word + "." || aword == word + "," || aword == word + "'s") {count++;}
+		} while (!Document.eof());
 
 		std::cout << word << " appears " << count << " times.\n";
 
 		std::cout << "Would you like to continue the program? (Y/N): \n";
-		std::cin >> x;
+		std::cin >> ans;
+		Document.close();
+
 	}
 
-	Document.close();
 }

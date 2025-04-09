@@ -11,7 +11,7 @@
   - New accounts may be created with [OPEN] and existing accounts may be closed with [CLOSE]
 
 - 'accounts.txt' contains user data:
-  - Contains user data in format: ``ID PIN CheckingAccNum CheckingAccBal SavingsAccNum SavingsAccBal```
+  - Contains user data in format: ```ID PIN CheckingAccNum CheckingAccBal SavingsAccNum SavingsAccBal```
   - **DO NOT** add more lines to the file unless you change anywhere in the code that uses '100' as an iterator amount!
   - Program can support up to 100 accounts
   - Closed accounts are not written back into the file
